@@ -1,9 +1,7 @@
-class Array; 
-  def prod; 
-    inject( nil ) do |prod,x| 
-      prod ? prod*x : x 
-    end 
-  end; 
+class Array
+  def prod 
+    inject do |prod,x| prod ? prod * x : x end 
+  end
 end
 
 n = 2
@@ -11,11 +9,7 @@ arr = []
 
 while (n <= 20)
   currn = n
-  arr.each do |i|
-    if currn % i == 0
-      currn /= i
-    end
-  end
+  arr.each {|i| currn /= i if currn % i == 0}
   arr << currn
   n+=1
 end
