@@ -1,16 +1,20 @@
-numbers = (2..10).to_a
+numbers = (2..1000).to_a
 
-numbers.map! {|e| [1.0/e,1.0/e]}
+numbers.map! {|e| 1.0/e}
 
 puts numbers.inspect
 count = 0
-while numbers.length > 2 do
-  puts "***"
-  numbers.map! {|e| [10*e[0],e[1]]}
-  numbers = numbers.delete_if {|e| e[0]%1.0 == 0}
-  puts numbers.inspect
-  numbers = numbers.delete_if {|e| e[0] - e[1] % 1.0 == 0}
+puts "***"
+while numbers.length > 1 do
+  temp = []
+  numbers.each do |e|
+    temp << e if ((10 ** count) * e % 1.0 != 0) || (((10 ** count - 1) * e) % 1.0 != 0)
+  end
+  numbers = temp
+  puts  numbers.inspect
+  
   count += 1
-  puts numbers.inspect
 end
+puts numbers.inspect
+
 puts numbers[1], count
