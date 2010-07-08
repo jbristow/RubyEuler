@@ -1,23 +1,41 @@
-def even(n)
-  return n / 2
-end
-
-def odd(n)
-  return 3*n + 1
-end
-
-def chain(n)
-  counter = 0
-  while n != 1 do
-    if n % 2 == 0 then
-      n = even(n)
-    else
-      n = odd(n)
-    end
-    counter+=1
+class Chainer
+  attr_accessor :prevChains
+  
+  def initialize
+    @prevChains = [0]
   end
-  return counter
+  
+  def chain(n)
+    return @prevChains[n] if n < @prevChains.length 
+    
+    counter = 0
+    while n != 1 do
+      if n % 2 == 0 then
+        n /= 2
+      else
+        n = 3 * n + 1
+      end
+      counter+=1
+      
+      if n < @prevChains.length then
+        @prevChains << (counter + @prevChains[n])
+        return counter + @prevChains[n]
+      end
+    end
+    @prevChains << counter
+    return counter
+  end
 end
+
 
 maxchain = 0
-(1..9999999).each {|n| maxchain = [maxchain, chain(n)]}
+num = 0
+c = Chainer.new
+start = Time.new
+1.upto(999999) do |n| 
+  chained = c.chain(n)
+  if (chained > maxchain) then
+    num, maxchain = n, chained
+  end
+end
+puts [maxchain, num, Time.new - start].inspect
