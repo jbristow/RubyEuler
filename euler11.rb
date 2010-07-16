@@ -25,16 +25,22 @@ grid="8 2 22 97 38 15 0 40 0 75 4 5 7 78 52 12 50 77 91 8\n"\
 +"20 73 35 29 78 31 90 1 74 31 49 71 48 86 81 16 23 57 5 54\n"\
 +"1 70 54 71 83 51 54 69 16 92 33 48 61 43 52 1 89 19 67 48\n"
 
-lines = grid.split("\n")
-lines.map! {|i| i.split(' ')}
-maxprod = 0
-0.upto(lines.length-4) do |y|
-  0.upto(lines[y].length-4) do |x|
-    horizprod = lines[y].slice(x,4).prod
-    vertprod = lines.slice(y,4).map {|e| e[x]}.prod
-    diagright = lines.slice(y,4).zip(0..4).map {|i| i[0][x+i[1]]}.prod 
-    diagleft = lines.slice(y,4).zip(0..4).map {|i| i[0][x+4-i[1]]}.prod 
-    maxprod = [maxprod,horizprod, vertprod, diagright, diagleft].max
+def solver(grid)
+  lines = grid.split("\n")
+  lines.map! {|i| i.split(' ')}
+  maxprod = 0
+  0.upto(lines.length-4) do |y|
+    0.upto(lines[y].length-4) do |x|
+      horizprod = lines[y].slice(x,4).prod
+      vertprod = lines.slice(y,4).map {|e| e[x]}.prod
+      diagright = lines.slice(y,4).zip((0..4).to_a).map {|i| i[0][x+i[1]]}.prod 
+      diagleft = lines.slice(y,4).zip((0..4).to_a).map {|i| i[0][x+4-i[1]]}.prod 
+      maxprod = [maxprod,horizprod, vertprod, diagright, diagleft].max
+    end
   end
+  puts maxprod
 end
-puts maxprod
+
+
+require 'timer_utils'
+run lambda{solver(grid)}

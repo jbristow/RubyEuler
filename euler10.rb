@@ -1,8 +1,23 @@
-require 'mathn'
-start =  Time.now
-sum = Prime.instance.inject { |sum, n|
-  break sum unless n < 2_000_000
-  sum + n
-}
-puts "Finished at #{(Time.now - start)}."
-puts "Sum is #{sum}."
+def solver
+  primes = []
+  possible = 3
+  while possible < 2_000_000 do
+    primes << possible if prime?(possible, primes)
+    possible += 2
+  end
+  puts (2 + primes.inject {|a,c| a+c})
+end
+
+def prime?(possible, primes)
+  return true if primes.length == 0 && possible == 3
+  
+  primes.each do |prime|
+    return true if prime * prime > possible 
+    return false if possible % prime == 0  
+  end
+  
+  return true
+end
+
+require 'timer_utils'
+run lambda{solver}

@@ -9,10 +9,11 @@ class Array;
   end; 
 end
 
+start = Time.new
 maxprod = 0
 while num.length > 5 do
   maxprod = [num.slice(0,5).prod, maxprod].max
   num.shift
 end
 puts maxprod
-
+puts (Time.new - start)*1000
