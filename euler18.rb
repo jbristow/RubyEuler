@@ -16,10 +16,10 @@ pyramid="75\n"\
 
 pyramid = pyramid.split("\n").map{|e| e.split(' ')}
 
-
 def last_row?(row,pyramid)
-  return pyramid.length <= row+1 
+  return pyramid.length <= row+1
 end
+
 def has_right(row,pyramid)
   return pyramid.length > row+1
 end
@@ -31,9 +31,14 @@ def process_node(row, n, sum, pyramid)
     right = process_node(row+1,n+1,current+sum,pyramid)
     return [left, right].max
   else
-    puts "leaf-#{n}-#{sum+current}"
     return sum+current
   end
 end
 
-puts process_node(0,0,0,pyramid)
+def solver(pyramid) 
+  puts process_node(0,0,0,pyramid)
+end
+
+require 'timer_utils'
+
+run lambda{solver(pyramid)}
