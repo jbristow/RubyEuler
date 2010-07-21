@@ -1,25 +1,12 @@
-require 'generator'
-
-def f(&block)
-  f_n = Generator.new do |g|
-    n = 0
-    while true
-      val = yield n
-      g.yield val
-      n+= 1
-
-    end
-  end
-  return f_n
-end
-
 class Integer
   def prime?
-    c = 2
+    return false if self <= 1
+    return false if self % 2 == 0
+    c = 3
     while c < self do
       return false if self % c == 0
       return true if c*c > self
-      c+=1
+      c+=2
     end
     return true
   end
@@ -47,23 +34,38 @@ def primes_upto(n)
   primes
 end
 
-min = -1000
-max = 1000
 
-max_length = 0
-prod = 0
-list_asc = primes_upto(max)
-list_desc = list_asc.reverse.map {|e| -e}
-list = list_desc + [-1, 0, 1] + list_asc
+def fn(a,b,n)
+  n*n+a*n+b
+end
 
-list.each do |a|
-  list.each do |b|
-    c = f{|n| n**2+a*n+b }.take_while {|e| e > 0 && e.prime?}
-    if c.length > max_length
-      max_length = c.length
-      prod = a * b
-      puts "#{a}\t#{b}\t#{max_length}\t#{c.inspect}"
+def find_consecutive(a,b)
+  n = 0
+  while fn(a,b,n) > 0 && fn(a,b,n).prime?
+    n+=1
+  end
+  return n
+end
+
+def solver
+  max = 1000
+
+  max_length = 0
+  prod = 0
+  list_asc = primes_upto(max)
+  list_desc = list_asc.map {|e| -e}
+  list_desc.each do |a|
+    list_asc.each do |b|
+      c = find_consecutive(a,b)
+      if c > max_length then
+        prod = a * b
+        max_length = c
+      end
     end
   end
+  puts prod
 end
-puts prod
+
+require 'timer_utils'
+
+run lambda{solver}

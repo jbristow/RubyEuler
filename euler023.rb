@@ -34,7 +34,7 @@ def solver
   not_sums = abundant
   1.upto(abundant.length) do |i|
     i.upto(abundant.length) do |j|
-      not_sums.delete_if {|e| e == i+j}
+      not_sums.delete_if {|e| e == abundant[i]+abundant[j]}
     end
   end
   puts not_sums.inject(:+)
