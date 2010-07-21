@@ -6,3 +6,7 @@ end
 
 require 'timer_utils'
 run(lambda {solve})
+
+#233168
+#Mean: 0.16 ms
+#Median: 0.5 ms
