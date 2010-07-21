@@ -16,8 +16,12 @@ def solver
     primes << curr if primality
     curr+=2
   end
-  print primes.last
+  puts primes.last
 end
 
 require 'timer_utils'
 run lambda{solver}
+
+#104743
+#Mean: 6565.24 ms
+#Median: 7213.5 ms

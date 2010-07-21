@@ -10,3 +10,7 @@ end
 
 require 'timer_utils'
 run lambda{solver}
+
+#25164150
+#Mean: 0.04 ms
+#Median: 0.0 ms
