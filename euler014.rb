@@ -6,13 +6,13 @@ class Chainer
 
   def chain(n)
     
-    return self.prevChains[n] if self.prevChains.hasKey?(n)  
+    return self.prevChains[n] if self.prevChains.has_key?(n)  
     
     return @prevChains[n] if n < @prevChains.length
 
     counter = 0
     seen = [n]
-    while not self.prevChains.hasKey?(n) do
+    while not self.prevChains.has_key?(n) do
       if n % 2 == 0 then
         n /= 2
       else

@@ -12,9 +12,10 @@ def solver
   (0..9).each do |i|
     f=(9-i).factorial
     n=nth/f
-    sofar += seed[n]
+    digit = (seed[n] - ?0).to_s
+    sofar += digit
     nth -= f*n
-    seed = seed.delete(seed[n])
+    seed = seed.delete(digit)
   end
   puts sofar
 end

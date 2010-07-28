@@ -1,15 +1,18 @@
 require "mathn.rb"
 
 class Integer
+  attr_accessor :divisor_list
   def divisors
-    return (1..self).to_a.delete_if {|i| self % i != 0}
+    return self.divisor_list unless self.divisor_list.nil?
+    self.divisor_list = (1..self).to_a.delete_if {|i| self % i != 0}
+    return self.divisor_list
   end
 
   def prime_factors
     curr = self
     out = {}
     p = 2
-    while p <= curr do  
+    while p*p < self do
       while (curr % p == 0) do
         out[p] = 0 if out[p].nil?
         out[p] += 1
@@ -48,11 +51,12 @@ def solver
   while divisorcount < max do
     counter += 1
     divisorcount = triangle(counter).num_divisors
-    # puts [counter, triangle(counter), divisorcount].join("\t")
+    #puts [counter, triangle(counter), divisorcount, counter.prime_factors.values.inject(:+)].join("\t")
   end
 
   puts (triangle(counter))
 end
 
 require 'timer_utils'
+
 run lambda{solver}

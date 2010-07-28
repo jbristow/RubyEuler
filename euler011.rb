@@ -44,3 +44,7 @@ end
 
 require 'timer_utils'
 run lambda{solver(grid)}
+
+#70600674
+#Mean: 11.52884 ms
+#Median: 11.2825 ms
