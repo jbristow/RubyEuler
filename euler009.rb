@@ -18,7 +18,7 @@ def solver
 end
 
 require 'timer_utils'
-run lambda{solver}
+run{solver}
 
 #31875000
 #Mean: 34.34 ms

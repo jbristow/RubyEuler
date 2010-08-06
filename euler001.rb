@@ -5,7 +5,7 @@ def solve
 end
 
 require 'timer_utils'
-run(lambda {solve})
+run{solve}
 
 #233168
 #Mean: 0.16 ms

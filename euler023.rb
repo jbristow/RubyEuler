@@ -1,9 +1,16 @@
+require 'set'
 class Integer
   attr_accessor :divs
   def divisors
     return divs unless divs.nil?
-    self.divs = []
-    (1).upto(self-1) {|i| self.divs << i if self % i == 0}
+    self.divs = [1]
+      
+    2.upto(Math.sqrt(self)).each do |i|
+      if self % i == 0 then
+        self.divs << i 
+        self.divs << self / i if self / i != i
+      end
+    end
     return self.divs
   end
 
@@ -27,19 +34,29 @@ end
 def solver
   max = 28123
   abundant = []
-  2.upto(max) do |i|
+  1.upto(max) do |i|
     abundant << i if i.abundant?
-    #puts "#{i} #{i.divisors.inspect}" if i.abundant? && i % 2 != 0
   end
-  not_sums = abundant
-  1.upto(abundant.length) do |i|
-    i.upto(abundant.length) do |j|
-      not_sums.delete_if {|e| e == abundant[i]+abundant[j]}
+  not_sums = (1..max).to_a
+  sums = []
+  (0...abundant.length).each do |i|
+    (i...abundant.length).each do |j|
+      break if abundant[i] + abundant[j] > max 
+      sums << (abundant[i] + abundant[j])
     end
   end
-  puts not_sums.inject(:+)
+  puts (not_sums - sums).inject(:+)
 end
 
 require 'timer_utils'
 
-run lambda{solver}
+run(5){solver}
+
+# 4179871
+# One Run...
+# Mean: 23025.21 ms
+# Median: 23025.21 ms 
+
+# Five Runs...
+# Mean: 17608.267 ms
+# Median: 16312.437 ms

@@ -55,4 +55,7 @@ end
 
 require 'timer_utils'
 
-run lambda{solver}
+run(5){solver}
+# 983
+# Mean: 8353.2336 ms
+# Median: 8250.455 ms

@@ -20,7 +20,7 @@ def prime?(possible, primes)
 end
 
 require 'timer_utils'
-run lambda{solver}
+run{solver}
 
 #142913828922
 #Mean: 5294.56 ms

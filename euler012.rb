@@ -59,4 +59,4 @@ end
 
 require 'timer_utils'
 
-run lambda{solver}
+run{solver}

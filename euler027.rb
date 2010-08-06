@@ -34,7 +34,6 @@ def primes_upto(n)
   primes
 end
 
-
 def fn(a,b,n)
   n*n+a*n+b
 end
@@ -68,4 +67,7 @@ end
 
 require 'timer_utils'
 
-run lambda{solver}
+run{solver}
+# -59231
+# Mean: 522.83844 ms
+# Median: 561.991 ms

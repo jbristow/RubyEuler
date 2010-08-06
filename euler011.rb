@@ -43,7 +43,7 @@ end
 
 
 require 'timer_utils'
-run lambda{solver(grid)}
+run{solver(grid)}
 
 #70600674
 #Mean: 11.52884 ms

@@ -10,4 +10,9 @@ def solver
   puts list_a[list_a.length/2]
 end
 
-solver
+require 'timer_utils'
+run{solver}
+
+# 137846528820
+# Mean: 1.51534 ms
+# Median: 0.828 ms

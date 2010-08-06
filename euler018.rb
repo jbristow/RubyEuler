@@ -41,4 +41,7 @@ end
 
 require 'timer_utils'
 
-run lambda{solver(pyramid)}
+run{solver(pyramid)}
+# 1074
+# Mean: 88.71896 ms
+# Median: 87.854 ms
